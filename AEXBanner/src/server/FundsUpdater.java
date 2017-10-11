@@ -27,7 +27,7 @@ public class FundsUpdater extends TimerTask {
             {
                 Funds funds = (Funds)f;
 
-                updateFonds(funds);
+                updateFunds(funds);
             }
             catch(Exception ex)
             {
@@ -36,7 +36,7 @@ public class FundsUpdater extends TimerTask {
         }
     }
 
-    private void updateFonds(Funds funds)
+    private void updateFunds(Funds funds)
     {
         double exchangeRate = funds.getExchangeRate() + (Math.random() * 2) - 1;
 

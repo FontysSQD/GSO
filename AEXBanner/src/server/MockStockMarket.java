@@ -37,7 +37,7 @@ public class MockStockMarket extends UnicastRemoteObject implements IStockMarket
     private void setTimer()
     {
         timer = new Timer();
-        timer.scheduleAtFixedRate(new FundsUpdater(this.iFunds), 0, 500);
+        timer.scheduleAtFixedRate(new FundsUpdater(this.iFunds), 0, 1000);
     }
 
 
