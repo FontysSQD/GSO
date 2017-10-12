@@ -11,6 +11,11 @@ public class Appointment {
     private ITimeSpan timeSpan;
     private ArrayList<Contact> contacts;
 
+    /**
+     * The creation of an appointment with a list of contacts
+     * @param subject is the subject of the appointment
+     * @param timeSpan is the time span of the appointment
+     */
     public Appointment(String subject, ITimeSpan timeSpan) {
         this.subject = subject;
         this.timeSpan = timeSpan;
@@ -26,21 +31,28 @@ public class Appointment {
     }
 
     public Iterator<Contact> invitees() {
-        Iterator<Contact> iterator = contacts.iterator();
-        return iterator;
+        return contacts.iterator();
     }
 
+    /**
+     * Adds a contact to an appointment, and also adds the appointment to that contact
+     * @param c is the contact
+     * @return if the adding was successful
+     */
     public boolean addContact(Contact c) {
         try {
             contacts.add(c);
-            c.addAppointment(this);
-            return true;
+            return c.addAppointment(this);
         }
         catch (Exception ex){
             return false;
         }
     }
 
+    /**
+     * Removes a contact on an appointment, and also removes the appointment of that contact
+     * @param c is the contact
+     */
     public void removeContact(Contact c) {
         if (contacts.contains(c)) {
             c.removeAppointment(this);

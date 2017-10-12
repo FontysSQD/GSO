@@ -72,7 +72,7 @@ public class TimeSpanTest {
 
     @Test
     public void testIsPartOfFalse() throws Exception {
-        Boolean isPartOf = timeSpan.isPartOf(new TimeSpan(new Time(2010, 1, 1, 11, 11), new Time(2020, 2, 22, 22, 22)));
+        Boolean isPartOf = timeSpan.isPartOf(new TimeSpan(new Time(2009, 1, 1, 11, 11), new Time(2010, 2, 22, 22, 22)));
         Assert.assertEquals(false, isPartOf);
     }
 

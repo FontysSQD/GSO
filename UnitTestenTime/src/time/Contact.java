@@ -12,6 +12,10 @@ public class Contact {
     private String name;
     private ArrayList<Appointment> agenda;
 
+    /**
+     * The creation of an contact with a list of appointments
+     * @param name is the name of the contact
+     */
     public Contact(String name) {
         this.name = name;
         agenda = new ArrayList<>();
@@ -21,8 +25,18 @@ public class Contact {
         return name;
     }
 
+    /**
+     * Adds an appointment to an contact and checks if there is no existing appointment at the same time
+     * @param a is the appointment
+     * @return if the appointment was successfully added or not
+     */
     public boolean addAppointment(Appointment a) {
         if(a != null){
+            for(Appointment ap : agenda) {
+                if (ap.getTimeSpan().isPartOf(a.getTimeSpan())) {
+                    return false;
+                }
+            }
             agenda.add(a);
             return true;
         } else {
@@ -30,6 +44,10 @@ public class Contact {
         }
     }
 
+    /**
+     * Removes the appointment of an contact
+     * @param a is the appointment
+     */
     public void removeAppointment(Appointment a) {
         if (agenda.contains(a)) {
             agenda.remove(a);
@@ -39,7 +57,6 @@ public class Contact {
     }
 
     public Iterator<Appointment> appointments() {
-        Iterator<Appointment> iterator = agenda.iterator();
-        return iterator;
+        return agenda.iterator();
     }
 }

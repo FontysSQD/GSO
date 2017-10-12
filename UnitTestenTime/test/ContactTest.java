@@ -25,9 +25,16 @@ public class ContactTest {
     }
 
     @Test
-    public void testAddAppointment2() throws Exception {
-        Appointment a = null;
-        Assert.assertEquals(false, contact.addAppointment(a));
+    public void testAddAppointmentOverlaps() throws Exception {
+        Appointment a = new Appointment("test", new TimeSpan(new Time(2011, 1, 1, 11, 11), new Time(2022, 2, 22, 22, 22)));
+        contact.addAppointment(a);
+        Appointment a2 = new Appointment("test2", new TimeSpan(new Time(2012, 1, 1, 11, 11), new Time(2021, 2, 22, 22, 22)));
+        Assert.assertFalse(contact.addAppointment(a2));
+    }
+
+    @Test
+    public void testAddAppointmentNull() throws Exception {
+        Assert.assertFalse(contact.addAppointment(null));
     }
 
     @Test
