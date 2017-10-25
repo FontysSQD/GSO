@@ -3,7 +3,6 @@ package client;
 import fontys.observer.RemotePropertyListener;
 import shared.IFunds;
 import shared.IStockMarket;
-
 import java.beans.PropertyChangeEvent;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -11,7 +10,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
-import java.util.Timer;
 
 /**
  * Created by quintaartsen on 04-10-17.
