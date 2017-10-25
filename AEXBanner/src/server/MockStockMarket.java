@@ -1,5 +1,7 @@
 package server;
 
+import fontys.observer.BasicPublisher;
+import fontys.observer.RemotePropertyListener;
 import shared.IFunds;
 import shared.IStockMarket;
 
@@ -18,8 +20,10 @@ public class MockStockMarket extends UnicastRemoteObject implements IStockMarket
 
     private List<IFunds> iFunds;
     private Timer timer;
+    private BasicPublisher publisher;
 
     public MockStockMarket() throws RemoteException {
+        publisher = new BasicPublisher(new String[] {"stockMarket"});
         iFunds = new ArrayList<>();
         createFunds();
         setTimer();
@@ -29,20 +33,26 @@ public class MockStockMarket extends UnicastRemoteObject implements IStockMarket
         this.iFunds.add(new Funds("Philips"));
         this.iFunds.add(new Funds("KPN"));
         this.iFunds.add(new Funds("Heineken"));
-
-
     }
 
-
-    private void setTimer()
-    {
+    private void setTimer() {
         timer = new Timer();
         timer.scheduleAtFixedRate(new FundsUpdater(this.iFunds), 0, 1000);
     }
 
-
     @Override
     public List<IFunds> getExchangeRates() {
+        publisher.inform(this, "stockMarket", null, iFunds);
         return iFunds;
+    }
+
+    @Override
+    public void addListener(RemotePropertyListener remotePropertyListener, String s) throws RemoteException {
+        publisher.addListener(remotePropertyListener, s);
+    }
+
+    @Override
+    public void removeListener(RemotePropertyListener remotePropertyListener, String s) throws RemoteException {
+        publisher.removeListener(remotePropertyListener, s);
     }
 }

@@ -28,7 +28,7 @@ public class Contact {
     /**
      * Adds an appointment to an contact and checks if there is no existing appointment at the same time
      * @param a is the appointment
-     * @return if the appointment was successfully added or not
+     * @return true if the appointment was successfully added (not overlapped with other appointments)
      */
     public boolean addAppointment(Appointment a) {
         if(a != null){

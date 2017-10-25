@@ -1,5 +1,6 @@
 package server;
 
+import fontys.observer.BasicPublisher;
 import shared.IFunds;
 
 import java.util.ArrayList;
@@ -11,35 +12,27 @@ import java.util.TimerTask;
  */
 public class FundsUpdater extends TimerTask {
 
-    private List<IFunds> iFonds = new ArrayList<>();
+    private List<IFunds> iFunds = new ArrayList<>();
 
-    public FundsUpdater(List<IFunds> iFonds)
-    {
-        this.iFonds = iFonds;
+    public FundsUpdater(List<IFunds> iFunds) {
+        this.iFunds = iFunds;
     }
 
     @Override
     public void run() {
-
-        for (IFunds f : this.iFonds)
-        {
-            try
-            {
+        for (IFunds f : this.iFunds) {
+            try {
                 Funds funds = (Funds)f;
 
                 updateFunds(funds);
-            }
-            catch(Exception ex)
-            {
+            } catch(Exception ex) {
                 System.out.println("Exception: " + ex.getMessage());
             }
         }
     }
 
-    private void updateFunds(Funds funds)
-    {
+    private void updateFunds(Funds funds) {
         double exchangeRate = funds.getExchangeRate() + (Math.random() * 2) - 1;
-
         funds.setExchangeRate(exchangeRate);
     }
 }

@@ -9,6 +9,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.rmi.RemoteException;
+
 
 /**
  * Created by quintaartsen on 04-10-17.
@@ -27,8 +29,11 @@ public class AEXBanner extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
-        controller = new BannerController(this);
+        try {
+            controller = new BannerController(this);
+        } catch (RemoteException ex){
+            System.out.println(ex.getMessage());
+        }
 
         Font font = new Font("Arial", HEIGHT);
         text = new Text();

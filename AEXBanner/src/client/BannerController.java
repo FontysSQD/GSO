@@ -1,25 +1,29 @@
 package client;
 
+import fontys.observer.RemotePropertyListener;
+import shared.IFunds;
 import shared.IStockMarket;
 
+import java.beans.PropertyChangeEvent;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 import java.util.Timer;
 
 /**
  * Created by quintaartsen on 04-10-17.
  */
-public class BannerController {
+public class BannerController extends UnicastRemoteObject implements RemotePropertyListener {
     private AEXBanner banner;
-    private Timer pollingTimer;
     private Registry registry = null;
     private IStockMarket stockMarket;
     private static final String bindingName = "stockMarket";
 
 
-    public BannerController(AEXBanner banner) {
+    public BannerController(AEXBanner banner) throws RemoteException{
         try {
             registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
         } catch (RemoteException rex) {
@@ -31,6 +35,7 @@ public class BannerController {
             printContentsRegistry();
             try {
                 stockMarket = (IStockMarket) registry.lookup(bindingName);
+                stockMarket.addListener(this, "stockMarket");
             } catch (RemoteException rex) {
                 System.out.println(rex.getMessage());
                 stockMarket = null;
@@ -40,14 +45,7 @@ public class BannerController {
             }
         }
 
-        this.banner = new AEXBanner();
-
-        pollingTimer = new Timer();
-        pollingTimer.schedule(new FundsGetter(banner, stockMarket), 500, 2000);
-    }
-
-    public void stop() {
-        pollingTimer.cancel();
+        this.banner = banner;
     }
 
     private void printContentsRegistry() {
@@ -64,6 +62,30 @@ public class BannerController {
         } catch (RemoteException ex) {
             System.out.println("Client: Cannot show list of names bound in registry");
             System.out.println("Client: RemoteException: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {
+        if(propertyChangeEvent.getPropertyName().equals("stockMarket")){
+            setExchanges((List<IFunds>) propertyChangeEvent.getNewValue());
+        }
+    }
+
+    private void setExchanges(List<IFunds> funds){
+        String fundString = "";
+        for (IFunds fund : funds){
+            fundString += fund.toString() + " ";
+        }
+
+        banner.setExchange(fundString);
+    }
+
+    public void stop(){
+        try {
+            stockMarket.removeListener(this, "stockMarket");
+        } catch (RemoteException ex){
+            System.out.println(ex.getMessage());
         }
     }
 }
