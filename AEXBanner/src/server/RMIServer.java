@@ -37,7 +37,7 @@ public class RMIServer {
 
         try{
             while(true){
-                publisher.inform(this, "stockMarket", null, stockMarket.getExchangeRates());
+                stockMarket.getExchangeRates();
                 Thread.sleep((long)(1000 + 2000 * Math.random()));
             }
         } catch (RemoteException ex){
