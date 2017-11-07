@@ -65,7 +65,7 @@ public class Time implements ITime {
             case GregorianCalendar.SATURDAY:
                 return DayInWeek.SAT;
             default:
-            /* this line of code cannot be covert in a unit test due to the checks in the constructor */
+            /* this line of code cannot be covert in a unit test due to the checks in the constructor of this class*/
             return null;
         }
     }

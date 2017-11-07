@@ -40,7 +40,7 @@ public class TimeSpan implements ITimeSpan {
             throw new IllegalArgumentException("begin time "
                     + beginTime + " must be earlier than end time " + et);
         }
-        // Added an "else"
+        // Added "else"
         else {
             bt = beginTime;
         }
@@ -52,7 +52,7 @@ public class TimeSpan implements ITimeSpan {
             throw new IllegalArgumentException("end time "
                     + endTime + " must be later then begin time " + bt);
         }
-        // Added an "else"
+        // Added "else"
         else {
             et = endTime;
         }
@@ -69,7 +69,7 @@ public class TimeSpan implements ITimeSpan {
         if (minutes <= 0) {
             throw new IllegalArgumentException("length of period must be positive");
         }
-        // Added an "else"
+        // Added "else"
         else{
             et = et.plus(minutes);
         }

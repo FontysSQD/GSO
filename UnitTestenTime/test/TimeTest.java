@@ -138,14 +138,4 @@ public class TimeTest {
         Time time2 = new Time(2017, 9, 21, 11, 50);
         Assert.assertEquals(-10, time.difference(time2));
     }
-
-
-    /**
-     * This unit test can actually be ignored gives me 100% coverage in of the methods in the enum.
-     * This unit test calls the constructor of the enum. Something JaCoCo wants for 100% coverage.
-     */
-    @Test
-    public void testEnum() throws Exception {
-        DayInWeek.valueOf(DayInWeek.MON.toString());
-    }
 }

@@ -1,8 +1,5 @@
 package time;
 
-/**
- * UnitTestenTime Created by Sven de Vries on 27-9-2017
- */
 public class TimeSpan2 implements ITimeSpan {
     private ITime bt;
     private long timeSpan;

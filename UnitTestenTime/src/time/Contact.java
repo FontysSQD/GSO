@@ -1,13 +1,8 @@
 package time;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * UnitTestenTime Created by Sven de Vries on 27-9-2017
- */
 public class Contact {
     private String name;
     private ArrayList<Appointment> agenda;
@@ -47,6 +42,7 @@ public class Contact {
     /**
      * Removes the appointment of an contact
      * @param a is the appointment
+     * @exception IllegalArgumentException if the appointment does not exists.
      */
     public void removeAppointment(Appointment a) {
         if (agenda.contains(a)) {

@@ -3,9 +3,6 @@ package time;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * UnitTestenTime Created by Sven de Vries on 27-9-2017
- */
 public class Appointment {
     private String subject;
     private ITimeSpan timeSpan;
@@ -52,6 +49,7 @@ public class Appointment {
     /**
      * Removes a contact on an appointment, and also removes the appointment of that contact
      * @param c is the contact
+     * @exception IllegalArgumentException if the contact does not exists.
      */
     public void removeContact(Contact c) {
         if (contacts.contains(c)) {
