@@ -1,4 +1,5 @@
 import org.junit.Assert;
+import org.junit.Test;
 import time.ITimeSpan;
 import time.Time;
 

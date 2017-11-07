@@ -7,9 +7,6 @@ import time.TimeSpan;
 
 import java.util.Iterator;
 
-/**
- * UnitTestenTime Created by Sven de Vries on 27-9-2017
- */
 public class AppointmentTest {
     Appointment appointment = new Appointment("test", new TimeSpan(new Time(2011, 1, 1, 11, 11), new Time(2022, 2, 22, 22, 22)));
 

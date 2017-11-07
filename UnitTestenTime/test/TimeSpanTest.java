@@ -5,7 +5,7 @@ import time.Time;
 import time.TimeSpan;
 
 /**
- * UnitTesten-Time Created by Sven de Vries on 20-9-2017
+ * @author Dane Naebers
  */
 public class TimeSpanTest {
     ITimeSpan timeSpan = new TimeSpan(new Time(2011, 1, 1, 11, 11), new Time(2022, 2, 2, 22, 22));
